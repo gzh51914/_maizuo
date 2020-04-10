@@ -35,7 +35,7 @@
                     v-for="data in computedDatalist"
                     :key="data.cinemaId"
                     :data="data"
-                    @click.native="clickme"
+                    @click.native="clickme(data.cinemaId)"
                 ></CinemaItem>
             </ul>
         </div>
@@ -75,8 +75,8 @@ export default {
             }
             this.$router.push(path)
         },
-        clickme(){
-            alert(1111111111111)
+        clickme(id){
+            this.$router.push("/cinemaDetail/"+id)
         }
     },
     created() {
@@ -113,25 +113,8 @@ export default {
             scrollbar: {
                 fade: true,
             },
-            click:true,
-            // pullDownRefresh: {
-            //     threshold: 50,
-            //     stop: 20
-            // }
+            click:true,//允许被触发点击事件
         })
-        // scroll.on("pullingDown",()=>{
-        //     console.log("下拉刷星");
-        //     // this.getCinemaActions(this.cityId).then(res=>{
-        //     //     scroll.refresh()
-        //     // })
-        //     setTimeout(()=>{
-        //          scroll.refresh()
-        //          console.log(1);
-        //           scroll.finishPullDown()
-                 
-        //     },2000)
-            
-        // })
     },
 }
 </script>

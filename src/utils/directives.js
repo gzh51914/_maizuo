@@ -9,6 +9,7 @@ Vue.directive("swiper",{
                 // pagination:{
                 //     el:".swiper-pagination"
                 // }
+                
             })
         }
     }
