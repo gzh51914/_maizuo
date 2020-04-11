@@ -17,8 +17,8 @@
             <p :class="{synopsis:isActive}">{{filmInfo.synopsis}}</p>
             <i @click="isActive=!isActive" class="iconfont" :class="isActive?'icon-moreunfold':'icon-less'"></i>
         </div>
-        <h4>演职人员</h4>
-        <Swiper cName="actors">
+        <h4 class="title_actors">演职人员</h4>
+        <Swiper v-if="filmInfo.actors" class="actors">
             <div
                 v-for="(data,index) in filmInfo.actors"
                 :key="data.name"
@@ -34,11 +34,17 @@
                     }  
                 }"
             >
-                <img :src="data.avatarAddress" alt="">
+                <img :src="data.avatarAddress" alt="" class="target-img">
+                
+                <span class="actors-name" >{{data.name}}</span>
+                <span class="actors-role">{{data.role}}</span>
+           
+                
             </div>
         </Swiper>
-         <h4 @click="isPhotoShow=true">剧照</h4>
-         <Swiper cName="photos">
+           <div v-else class="uoactions">暂无演职人员</div>
+         <h4 @click="isPhotoShow=true" class="photos-title-bar">剧照</h4>
+         <Swiper v-if="filmInfo.photos" cName="photos">
             <div
                 v-for="(data,index) in filmInfo.photos"
                 :key="data"
@@ -56,10 +62,13 @@
                 }"
             >
                 <div>
-                    <img :src="data" alt="">
+                    <img :src="data" alt="" >
                 </div>
+               
             </div>
         </Swiper>
+         <div v-else class="empty-text">暂无剧照</div>
+
         <Photo v-show="isPhotoShow" :list="filmInfo.photos" @event="previewImg"> 
             <m-title  @back="handlePhoto">
                 剧照 ({{filmInfo.photos && filmInfo.photos.length}})
@@ -74,8 +83,10 @@ import Swiper from "@/components/Swiper"
 import Photo from "./detail/Photo"
 // import Title from "@/components/Title"
 import Vue from 'vue';
-import { ImagePreview } from 'vant';
+import { ImagePreview} from 'vant';
 Vue.use(ImagePreview);
+
+
 export default {
     props:["id"],
     data(){
@@ -85,10 +96,13 @@ export default {
             isPhotoShow:false
         }
     },
+
     components:{
         Swiper,
         Photo
+        
     },
+  
     methods: {
         previewImg(index){
             ImagePreview({
@@ -122,6 +136,7 @@ export default {
 <style lang="scss" scoped>
      img{
         width:100%;
+       
     }
     
     .filmInfo-con{
@@ -154,4 +169,66 @@ export default {
     .photos{
         margin-bottom: 100px;
     }
+    
+    .title_actors{
+        width: 3.75rem;
+        height: 0.525rem;
+        padding: 15px;
+        background: #ffffff;
+        color: #191a1b;
+      
+    }
+    .uoactions{
+        width: 3.75rem;
+        height: 1.4rem;
+        background: #ffffff;
+      
+        font-size: 14px;
+    color: #bdc0c5;
+    margin: auto;
+    text-align: center;
+    line-height: 1.4rem;
+    }
+    .photos-title-bar{
+width: 3.75rem;
+height: 0.62rem;
+  padding: 15px;
+  background: #ffffff;
+  color: #2c3e50;
+    }
+    .empty-text{
+        width: 3.75rem;
+        height: 1.15rem;
+        background: #ffffff;
+         margin: auto;
+    text-align: center;
+    line-height: 1.15rem;
+    }
+    .actors {
+     .target-img{
+         width:0.86rem;
+         height: 1.19rem;
+     }
+    }
+   
+    .actors-name{
+     width: 0.85rem;
+      height: 0.28rem;
+      margin-top: 8px;
+     text-align: center;
+     display: block;
+    color: #191a1b;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    
+    }
+      .actors-role{
+    width: 0.85rem;
+    height: 0.18rem;
+    color: #797d82;
+    text-align: center;
+    display: block;
+
+       }
 </style>
