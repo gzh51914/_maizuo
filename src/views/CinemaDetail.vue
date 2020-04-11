@@ -172,6 +172,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: .14rem;
     img{
       width: .14rem;
       height: .21rem;
@@ -260,6 +261,7 @@ export default {
   .showData{
     height: .5rem;
     align-items: center;
+    font-size: .14rem;
     ul{
     display: flex;
 
