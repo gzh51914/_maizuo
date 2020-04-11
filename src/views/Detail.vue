@@ -4,7 +4,7 @@
             <i class="iconfont icon-back" @click="back"></i>
             <span>少年的你</span>
         </div> -->
-        <m-title v-title="50" @back="handleBack">
+        <m-title v-title="50" @back="handleBack" class="title">
             {{filmInfo.name}}
         </m-title>
        <img :src="filmInfo.poster" alt="">
@@ -134,6 +134,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .title{
+        z-index: 1;
+    }
      img{
         width:100%;
        

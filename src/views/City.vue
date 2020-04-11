@@ -36,10 +36,12 @@ export default {
   },
   methods: {
     ...mapMutations("city",["setCityName","setCityId"]),
+    ...mapMutations("tabbar",["show","hide"]),
     handleClick(item){
       this.setCityName(item.name)
       this.setCityId(item.cityId)
-      this.$router.push("/cinema")
+      // this.$router.push("/cinema")
+      this.$router.back()
     },
     dataFilter(cities){
         let letterArr = []
@@ -64,6 +66,12 @@ export default {
         //给左侧遍历的数据赋值
         this.dataList = cityArr
     }
+  },
+   mounted() {
+    this.hide()
+  },
+  destroyed() {
+    this.show()
   }
   
 }
